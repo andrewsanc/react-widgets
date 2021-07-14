@@ -19,7 +19,7 @@ const items = [
 
 const App = () => {
   return (
-    <div>
+    <div className='ui container'>
       <Accordion items={items} />
     </div>
   )
