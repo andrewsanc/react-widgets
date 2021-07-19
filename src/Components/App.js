@@ -1,7 +1,7 @@
 import React from 'react';
 import Accordion from './Accordion';
-import './App.css';
 import Search from './Search';
+import './App.css';
 
 const items = [
   {
