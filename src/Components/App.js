@@ -4,6 +4,7 @@ import Search from "./Search";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate";
 import Route from "./Route";
+import Header from "./Header";
 import "./App.css";
 
 const items = [
@@ -40,25 +41,28 @@ const App = () => {
   const [selectedDropdown, setSelectedDropdown] = useState(options[0]);
 
   return (
-    <div className='ui container'>
-      <Route path='/'>
-        <Accordion items={items} />
-      </Route>
-      <Route path='/list'>
-        <Search />
-      </Route>
-      <Route path='/dropdown'>
-        <Dropdown
-          label='Select a Color'
-          options={options}
-          selectedDropdown={selectedDropdown}
-          onSelectedChange={setSelectedDropdown}
-        />
-      </Route>
-      <Route path='/translate'>
-        <Translate />
-      </Route>
-    </div>
+    <React.Fragment>
+      <Header />
+      <div className='ui container'>
+        <Route path='/'>
+          <Accordion items={items} />
+        </Route>
+        <Route path='/list'>
+          <Search />
+        </Route>
+        <Route path='/dropdown'>
+          <Dropdown
+            label='Select a Color'
+            options={options}
+            selectedDropdown={selectedDropdown}
+            onSelectedChange={setSelectedDropdown}
+          />
+        </Route>
+        <Route path='/translate'>
+          <Translate />
+        </Route>
+      </div>
+    </React.Fragment>
   );
 };
 
