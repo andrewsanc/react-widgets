@@ -5,6 +5,17 @@ const KEY = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM";
 
 const Convert = ({ selectedLanguage, textToTranslate }) => {
   const [translatedText, setTranslatedText] = useState("");
+  const [debouncedText, setDebouncedText] = useState(textToTranslate);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedText(textToTranslate);
+    }, 500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [textToTranslate]);
 
   useEffect(() => {
     const doTranslation = async () => {
@@ -13,18 +24,18 @@ const Convert = ({ selectedLanguage, textToTranslate }) => {
         {},
         {
           params: {
-            q: textToTranslate,
+            q: debouncedText,
             target: selectedLanguage.value,
             key: KEY,
           },
         }
       );
 
-      setTranslatedText(data.data.translations[0].axiostranslatedText);
+      setTranslatedText(data.data.translations[0].translatedText);
     };
 
     doTranslation();
-  }, [selectedLanguage, textToTranslate]);
+  }, [selectedLanguage, debouncedText]);
 
   return (
     <div>
